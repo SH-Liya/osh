@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132010059086",
+    "project_id": "osh-monitor",
+    "storage_bucket": "osh-monitor.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132010059086:android:97b00e7a82f6f14fa5aa1f",
+        "android_client_info": {
+          "package_name": "com.example.osh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDktoV5pJPKYZjk26LNeV6X4v1r09sRvsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

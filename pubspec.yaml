@@ -1,0 +1,45 @@
+name: osh
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+2002
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Firebase packages for login and database
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  # Package to automatically generate app launcher icons
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+  assets:
+  # Path of the image
+    - assets/images/osh_logo.png 
+
+  # ── APP LAUNCHER ICON SETTINGS ──────────────────────────────
+  #  flutter_launcher_icons , refers which image to use, not the default one 
+flutter_launcher_icons:
+  android: true          # Generate icon for Android
+  ios: true              # Generate icon for iOS
+  # Path to  OSH logo image file
+  image_path: "assets/images/osh_logo.png"
+  min_sdk_android: 21    # Minimum Android version supported
+  # Adaptive icon settings (Android 8.0+)
+  # Background colour — white to match  logo
+  adaptive_icon_background: "#ffffff"
+  # Foreground image for adaptive icon
+  adaptive_icon_foreground: "assets/images/osh_logo.png"
