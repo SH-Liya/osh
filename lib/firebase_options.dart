@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
     storageBucket: 'osh-monitor.firebasestorage.app',
+    androidClientId: '132010059086-ch05bd4apv603lj2dhoal3162dgl346h.apps.googleusercontent.com',
+    iosClientId: '132010059086-d8vgsaq4tbi2h0p670pi1of9nbb5ob83.apps.googleusercontent.com',
     iosBundleId: 'com.example.osh',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
     storageBucket: 'osh-monitor.firebasestorage.app',
+    androidClientId: '132010059086-ch05bd4apv603lj2dhoal3162dgl346h.apps.googleusercontent.com',
+    iosClientId: '132010059086-d8vgsaq4tbi2h0p670pi1of9nbb5ob83.apps.googleusercontent.com',
     iosBundleId: 'com.example.osh',
   );
 
@@ -85,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'osh-monitor.firebasestorage.app',
     measurementId: 'G-9GWRVLVN6D',
   );
+
 }
