@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
     authDomain: 'osh-monitor.firebaseapp.com',
+    databaseURL: 'https://osh-monitor-default-rtdb.firebaseio.com',
     storageBucket: 'osh-monitor.firebasestorage.app',
     measurementId: 'G-QBWG8YV6ND',
   );
@@ -55,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:132010059086:android:97b00e7a82f6f14fa5aa1f',
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
+    databaseURL: 'https://osh-monitor-default-rtdb.firebaseio.com',
     storageBucket: 'osh-monitor.firebasestorage.app',
   );
 
@@ -63,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:132010059086:ios:d62d59a3b257cc8ca5aa1f',
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
+    databaseURL: 'https://osh-monitor-default-rtdb.firebaseio.com',
     storageBucket: 'osh-monitor.firebasestorage.app',
     androidClientId: '132010059086-ch05bd4apv603lj2dhoal3162dgl346h.apps.googleusercontent.com',
     iosClientId: '132010059086-d8vgsaq4tbi2h0p670pi1of9nbb5ob83.apps.googleusercontent.com',
@@ -74,6 +77,7 @@ class DefaultFirebaseOptions {
     appId: '1:132010059086:ios:d62d59a3b257cc8ca5aa1f',
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
+    databaseURL: 'https://osh-monitor-default-rtdb.firebaseio.com',
     storageBucket: 'osh-monitor.firebasestorage.app',
     androidClientId: '132010059086-ch05bd4apv603lj2dhoal3162dgl346h.apps.googleusercontent.com',
     iosClientId: '132010059086-d8vgsaq4tbi2h0p670pi1of9nbb5ob83.apps.googleusercontent.com',
@@ -86,6 +90,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '132010059086',
     projectId: 'osh-monitor',
     authDomain: 'osh-monitor.firebaseapp.com',
+    databaseURL: 'https://osh-monitor-default-rtdb.firebaseio.com',
     storageBucket: 'osh-monitor.firebasestorage.app',
     measurementId: 'G-9GWRVLVN6D',
   );

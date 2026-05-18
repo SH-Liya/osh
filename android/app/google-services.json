@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "132010059086",
+    "firebase_url": "https://osh-monitor-default-rtdb.firebaseio.com",
     "project_id": "osh-monitor",
     "storage_bucket": "osh-monitor.firebasestorage.app"
   },
