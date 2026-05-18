@@ -1,13 +1,14 @@
 
-// login_screen.dart
-// User signs in with email and password
-// Shows popup warnings if fields empty or credentials wrong
-// Connected to Firebase Authentication
+// login_screen.dart — OSH Monitor Login Screen
+// Email and password authentication connected to Firebase
+// Navigates to HomeScreen after successful login
+// Shows error messages for invalid credentials
 
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'registration_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,20 +19,20 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
-  // Controllers to read email and password
+  // Controllers to read email and password fields
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // Password visibility toggle
+  // Password visibility toggle — false means hidden
   bool _passwordVisible = false;
 
-  // Remember me checkbox
+  // Remember me checkbox state
   bool _rememberMe = false;
 
-  // Shows loading spinner when logging in
+  // Shows loading spinner when login is in progress
   bool _isLoading = false;
 
-  // Firebase auth instance
+  // Firebase Authentication instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -41,14 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  // Shows popup message at bottom of screen
+  // Shows a popup message at the bottom of the screen
   void _showSnackbar(String message, {bool isError = true}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
         backgroundColor: isError
-            ? const Color(0xFFC62828) // Red for errors
-            : const Color(0xFF2E7D32), // Green for success
+            ? const Color(0xFFC62828)
+            : const Color(0xFF2E7D32),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -57,46 +58,52 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Validates fields and logs user in with Firebase
+  // Validates fields and signs in with Firebase Authentication
   Future<void> _login() async {
 
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
-    // Show popup if email is empty
+    // Validates email field is not empty
     if (email.isEmpty) {
       _showSnackbar('Please enter your email address');
       return;
     }
 
-    // Show popup if password is empty
+    // Validates password field is not empty
     if (password.isEmpty) {
       _showSnackbar('Please enter your password');
       return;
     }
 
-    // Show loading spinner
+    // Shows loading spinner while Firebase authenticates
     setState(() => _isLoading = true);
 
     try {
-      // Try to sign in with Firebase
+      // Attempts to sign in with Firebase Authentication
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Success — navigate to main menu
+      // Shows welcome message on successful login
       _showSnackbar('Welcome back!', isError: false);
 
-      // Navigate to main screen — will be added later
-      // Navigator.pushReplacement(context,
-      //   MaterialPageRoute(builder: (_) => const MonitorScreen()));
+      // Short delay to show welcome message before navigating
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      // Navigates to HomeScreen after successful login
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      }
 
     } on FirebaseAuthException catch (e) {
-      // Show specific error messages based on Firebase error code
+      // Shows specific error message based on Firebase error code
       if (e.code == 'user-not-found') {
-        _showSnackbar(
-            'No account found with this email. Please register first.');
+        _showSnackbar('No account found with this email. Please register first.');
       } else if (e.code == 'wrong-password') {
         _showSnackbar('Incorrect password. Please try again.');
       } else if (e.code == 'invalid-email') {
@@ -104,12 +111,12 @@ class _LoginScreenState extends State<LoginScreen> {
       } else if (e.code == 'too-many-requests') {
         _showSnackbar('Too many failed attempts. Please try again later.');
       } else if (e.code == 'invalid-credential') {
-        _showSnackbar(
-            'Email or password is incorrect. Please try again.');
+        _showSnackbar('Email or password is incorrect. Please try again.');
       } else {
         _showSnackbar('Login failed. Please try again.');
       }
     } finally {
+      // Hides loading spinner after login attempt completes
       if (mounted) setState(() => _isLoading = false);
     }
   }
@@ -127,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 30),
 
-              // OSH logo
+              // OSH logo displayed at the top
               Center(
                 child: SizedBox(
                   width: 160,
@@ -141,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 28),
 
-              // Heading
+              // Screen heading
               const Text(
                 'Welcome back',
                 style: TextStyle(
@@ -163,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 32),
 
-              // Email label
+              // Email field label
               const Text(
                 'Email',
                 style: TextStyle(
@@ -175,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 8),
 
-              // Email field
+              // Email input field
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -211,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 16),
 
-              // Password label
+              // Password field label
               const Text(
                 'Password',
                 style: TextStyle(
@@ -223,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 8),
 
-              // Password field with show/hide
+              // Password input field with show/hide toggle
               TextField(
                 controller: _passwordController,
                 obscureText: !_passwordVisible,
@@ -272,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 12),
 
-              // Remember me and forgot password row
+              // Remember me checkbox and forgot password link row
               Row(
                 children: [
                   GestureDetector(
@@ -281,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Row(
                       children: [
-                        // Animated checkbox
+                        // Animated checkbox changes colour when ticked
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           width: 20,
@@ -315,10 +322,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const Spacer(),
-                  // Forgot password
+                  // Forgot password link
                   GestureDetector(
-                    onTap: () {
-                      // Forgot password added later
+                    onTap: () async {
+                      // Sends password reset email if email field is filled
+                      final email = _emailController.text.trim();
+                      if (email.isEmpty) {
+                        _showSnackbar('Enter your email first then tap forgot password');
+                        return;
+                      }
+                      try {
+                        await _auth.sendPasswordResetEmail(email: email);
+                        _showSnackbar(
+                          'Password reset email sent to $email',
+                          isError: false,
+                        );
+                      } catch (e) {
+                        _showSnackbar('Could not send reset email. Check your email address.');
+                      }
                     },
                     child: const Text(
                       'Forgot password?',
@@ -334,7 +355,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 28),
 
-              // Login button with loading spinner
+              // Login button — shows spinner while loading
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -370,7 +391,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 16),
 
-              // Create account button — goes to registration screen
+              // Create account button — navigates to registration screen
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -403,6 +424,39 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
+              const SizedBox(height: 20),
+
+              // No account message
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const RegisterScreen(),
+                      ),
+                    );
+                  },
+                  child: RichText(
+                    text: const TextSpan(
+                      text: "Don't have an account? ",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF888888),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Register here',
+                          style: TextStyle(
+                            color: Color(0xFF2E7D32),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
